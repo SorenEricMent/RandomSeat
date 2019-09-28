@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="Unicode"/>
+		<title>缘分天空 作者：胡云川</title>
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+				font-family: "Microsoft YaHei";
+				font: #c103de;
+				text-align: center;
+			}
+			body {
+				background-color: #ded209;
+			}
+			#webpage-title {
+				font-size: 85px;
+			}
+			#webpage-subtitle {
+				font-size: 65px;
+			}
+			#author-title {
+				color: #9999ff;
+				font-size: 45px;
+			}
+			#author-subtitle {
+				font-size: 12px;
+			}
+			#random-animation {
+				width: 100%;
+				display: block;
+			}
+			#r1 {
+				display: inline-block;
+				width: 320px;
+				height: 320px;
+				border: 6px solid #9999FF;
+				margin: 1px;
+			}
+			#r2 {
+				display: inline-block;
+				width: 320px;
+				height: 320px;
+				border: 6px solid #9999FF;
+				margin: 1px;
+			}
+			#chooseStart {
+				width: 60%;
+				height: 200px;
+				font-size: 60px;
+			}
+			#g1 {
+				font-size: 80px;
+			}
+			#w1 {
+				font-size: 160px;
+			}
+			#w2 {
+				font-size: 160px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- <iframe width="0px" height="0px" src="data/ds.m4a"></iframe> -->
+		<p id="webpage-title">
+			缘分...天空!!!!!
+		</p>
+		<p id="webpage-subtitle">
+			❤让上帝赐予我亲爱的Partner!❤
+		</p>
+		<p id="author-title">
+			作者:当然是我神奇WinslowEric!
+		</p>
+		<p id="author-subtitle">
+			P.S.这个绝对没有内幕，你要相信我，我是好人!
+		</p>
+		<br/>
+		<input type="button" value="进行一次随缘选择！！！" id="chooseStart"/>
+		<br/>
+		<br/>
+		<div id="random-animation">
+			<div id="r1">
+				<p id="w1"> </p>
+			</div>
+			<div id="r2">
+				<p id="w2"> </p>
+			</div>
+			<p id="g1"> </p>
+		</div>
+		<p id="displayer"> </p>
+		<script id="main-javascript-controller">
+			var counter = 0;
+			var classMembers = [];
+			for (var i = 1; i <= 22; i++) {
+				classMembers[i-1] = i;
+			}
+			var totalStep = classMembers.length/2;
+			chooseStart.onclick = function() {
+				if (safeCheck()) {
+					decisionMake();
+				}
+			}
+			//Check if program finished. Avoid from hogging CPU.
+			function safeCheck() {
+				counter += 1;
+				if (counter > totalStep) {
+					alert("排序完成");
+					return 0;
+				} else {
+					return 1;
+				}
+			}
+
+			function decisionMake() {
+				var firstChoice = classMembers[randomNumber(classMembers[0],classMembers.length)-1];
+				var secondChoice = classMembers[randomNumber(classMembers[0],classMembers.length)-1];
+				console.log(firstChoice+","+secondChoice);
+				if (firstChoice == secondChoice) {
+					console.log("错误：数值重复，重新取值");
+					decisionMake();
+				}else{
+				removeByValue(classMembers, firstChoice);
+				removeByValue(classMembers, secondChoice);
+				w1.innerHTML = firstChoice;
+				w2.innerHTML = secondChoice;
+				}
+			}
+
+			//Pre-defined Function
+			function sleep(milliSeconds) {
+				var startTime = new Date().getTime();
+				while (new Date().getTime() < startTime + milliSeconds);
+			}
+
+			function removeByValue(arr, val) {
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] == val) {
+						arr.splice(i, 1);
+						break;
+					}
+				}
+			}
+
+			function randomNumber(n, m) {
+				var c = m - n + 1;
+				return Math.floor(Math.random() * c + n);
+			}
+		</script>
+	</body>
+</html>
